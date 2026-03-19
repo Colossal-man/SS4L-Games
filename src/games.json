@@ -1,0 +1,44 @@
+[
+  {
+    "id": "2048",
+    "title": "2048",
+    "thumbnail": "https://picsum.photos/seed/2048/400/300",
+    "iframeUrl": "https://play2048.co/",
+    "category": "Puzzle"
+  },
+  {
+    "id": "tetris",
+    "title": "Tetris",
+    "thumbnail": "https://picsum.photos/seed/tetris/400/300",
+    "iframeUrl": "https://tetris.com/play-tetris",
+    "category": "Classic"
+  },
+  {
+    "id": "snake",
+    "title": "Snake",
+    "thumbnail": "https://picsum.photos/seed/snake/400/300",
+    "iframeUrl": "https://www.google.com/logos/2010/pacman10-i.html",
+    "category": "Classic"
+  },
+  {
+    "id": "slope",
+    "title": "Slope",
+    "thumbnail": "https://picsum.photos/seed/slope/400/300",
+    "iframeUrl": "https://krunker.io/",
+    "category": "Action"
+  },
+  {
+    "id": "paperio",
+    "title": "Paper.io 2",
+    "thumbnail": "https://picsum.photos/seed/paperio/400/300",
+    "iframeUrl": "https://paper-io.com/",
+    "category": "IO"
+  },
+  {
+    "id": "holeio",
+    "title": "Hole.io",
+    "thumbnail": "https://picsum.photos/seed/holeio/400/300",
+    "iframeUrl": "https://hole-io.com/",
+    "category": "IO"
+  }
+]
