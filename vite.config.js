@@ -16,6 +16,10 @@ export default defineConfig(({mode}) => {
         '@': path.resolve(process.cwd(), '.'),
       },
     },
+    build: {
+      outDir: 'dist',
+      assetsDir: 'assets',
+    },
     server: {
       hmr: process.env.DISABLE_HMR !== 'true',
     },

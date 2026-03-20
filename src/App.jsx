@@ -31,7 +31,11 @@ export default function App() {
       {/* Header */}
       <header className="sticky top-0 z-40 bg-[#050508]/80 backdrop-blur-xl border-b border-white/5">
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-2 shrink-0">
+          <div className="flex items-center gap-2 shrink-0 cursor-pointer" onClick={() => {
+            setActiveCategory('All');
+            setSearchQuery('');
+            setSelectedGame(null);
+          }}>
             <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/20">
               <Gamepad2 className="text-white w-6 h-6" />
             </div>
@@ -81,9 +85,13 @@ export default function App() {
           ))}
         </div>
 
-        {/* Hero Section (Optional) */}
+        {/* Hero Section */}
         {activeCategory === 'All' && searchQuery === '' && (
-          <section className="mb-12 relative overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-500/20 to-purple-500/20 border border-white/10 p-8 sm:p-12">
+          <motion.section 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-12 relative overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-500/20 to-purple-500/20 border border-white/10 p-8 sm:p-12"
+          >
             <div className="relative z-10 max-w-xl">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-bold uppercase tracking-wider mb-4">
                 <Trophy className="w-3 h-3" />
@@ -104,7 +112,7 @@ export default function App() {
               </button>
             </div>
             <div className="absolute right-0 top-0 bottom-0 w-1/2 bg-gradient-to-l from-[#050508] to-transparent pointer-events-none hidden lg:block" />
-          </section>
+          </motion.section>
         )}
 
         {/* Games Grid */}
