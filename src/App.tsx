@@ -12,19 +12,52 @@ import {
 import { motion, AnimatePresence } from 'motion/react';
 
 // Games Data
-const gamesData = [
-  { id: "2048", title: "2048", thumbnail: "https://picsum.photos/seed/2048/400/300", iframeUrl: "https://play2048.co/", category: "Puzzle" },
-  { id: "tetris", title: "Tetris", thumbnail: "https://picsum.photos/seed/tetris/400/300", iframeUrl: "https://tetris.com/play-tetris", category: "Classic" },
-  { id: "snake", title: "Snake", thumbnail: "https://picsum.photos/seed/snake/400/300", iframeUrl: "https://www.google.com/logos/2010/pacman10-i.html", category: "Classic" },
-  { id: "slope", title: "Slope", thumbnail: "https://picsum.photos/seed/slope/400/300", iframeUrl: "https://krunker.io/", category: "Action" },
-  { id: "paperio", title: "Paper.io 2", thumbnail: "https://picsum.photos/seed/paperio/400/300", iframeUrl: "https://paper-io.com/", category: "IO" },
-  { id: "holeio", title: "Hole.io", thumbnail: "https://picsum.photos/seed/holeio/400/300", iframeUrl: "https://hole-io.com/", category: "IO" }
+const gamesData: { id: string; title: string; thumbnail: string; iframeUrl: string; category: string; }[] = [
+  { 
+    id: "basket-hoop", 
+    title: "Basket Hoop", 
+    thumbnail: "https://i.ibb.co/SXJnkkWt/image-2026-03-20-222150740.png", 
+    iframeUrl: "https://d11jzht7mj96rr.cloudfront.net/games/2024/construct/311/basket-hoop/index-gg.html", 
+    category: "Sports" 
+  },
+  {
+    id: "soccer-random",
+    title: "Soccer Random",
+    thumbnail: "https://i.ibb.co/xVQwQ7K/image-2026-03-20-230147166.png",
+    iframeUrl: "https://script.google.com/macros/s/AKfycbwr79gF5RqgUkBr0YEX16ayQF4aqdcHxaLRubcOggFvXqp-PiG7tw0uyvr3vlUEpDnC/exec",
+    category: "Sports"
+  },
+  {
+    id: "basket-random",
+    title: "Basket Random",
+    thumbnail: "https://i.ibb.co/3YpXMgQv/image-2026-03-20-230527992.png",
+    iframeUrl: "https://script.google.com/macros/s/AKfycbwiQgeRHVDP8wzJ_CeSE1LyaKCMu1qdlopwylhD4LdBvBVd2y36VjlWY0iyk38WH0JiJA/exec",
+    category: "Sports"
+  },
+  {
+    id: "basket-bros",
+    title: "Basket Bros",
+    thumbnail: "https://i.ibb.co/MxK7KXWc/image-2026-03-20-230109421.png",
+    iframeUrl: "https://script.google.com/macros/s/AKfycbxUfaDSpH-0SJL0WPKt38JY7OOOGMmtpY9JTSbL8pvtjxS7jSpNHHu6MdZgWUshIU00Kw/exec",
+    category: "Sports"
+  }
 ];
 
 export default function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedGame, setSelectedGame] = useState<typeof gamesData[0] | null>(null);
   const [activeCategory, setActiveCategory] = useState('All');
+
+  // Panic Key Implementation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === '`') {
+        window.location.href = 'https://www.google.com';
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   const categories = useMemo(() => {
     return ['All', ...new Set(gamesData.map(g => g.category))];
@@ -197,6 +230,16 @@ export default function App() {
                   <h2 className="font-bold text-lg">{selectedGame.title}</h2>
                 </div>
                 <div className="flex items-center gap-2">
+                  <button 
+                    onClick={() => {
+                      const frame = document.querySelector('iframe') as HTMLIFrameElement;
+                      if (frame) frame.src = frame.src;
+                    }}
+                    className="p-2 hover:bg-white/5 rounded-full transition-colors text-zinc-400 hover:text-white"
+                    title="Reload Game"
+                  >
+                    <Clock className="w-5 h-5" />
+                  </button>
                   <button className="p-2 hover:bg-white/5 rounded-full transition-colors text-zinc-400 hover:text-white">
                     <Maximize2 className="w-5 h-5" />
                   </button>
@@ -215,8 +258,10 @@ export default function App() {
                   src={selectedGame.iframeUrl}
                   className="w-full h-full border-none"
                   title={selectedGame.title}
+                  loading="lazy"
                   allowFullScreen
                   allow="autoplay; fullscreen; pointer-lock"
+                  sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-storage-access-by-user-activation"
                 />
               </div>
 
